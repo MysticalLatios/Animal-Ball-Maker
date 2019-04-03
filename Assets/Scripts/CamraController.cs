@@ -5,9 +5,9 @@ using UnityEngine;
 public class CamraController : MonoBehaviour
 {
     public GameObject player;
-    public float minFov = 15f;
-    public float maxFov = 90f;
-    public float sensitivity = 10f;
+    public float minFov = 30f;
+    public float maxFov = 130f;
+    public float sensitivity = 0.0005f;
 
     private Vector3 offset;
 
@@ -26,24 +26,37 @@ public class CamraController : MonoBehaviour
     private void Update()
     {
         //Fov ajustment for using a mouse
+       
         float fov = Camera.main.fieldOfView;
-        fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
-        fov = Mathf.Clamp(fov, minFov, maxFov);
-        Camera.main.fieldOfView = fov;
+        float new_fov = fov;
+        //fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
 
         //Implement pinch to ajust fov
         //If we have two touches on the screen
-        if (Input.touchCount >= 2)
+        if (Input.touchCount == 2)
         {
-            Vector2 touch0, touch1;
-            float distance;
-            touch0 = Input.GetTouch(0).position;
-            touch1 = Input.GetTouch(1).position;
-            distance = Vector2.Distance(touch0, touch1);
+            // Store both touches.
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
 
-            fov = Mathf.Clamp(distance, minFov, maxFov);
-            Camera.main.fieldOfView = fov;
+            // Find the position in the previous frame of each touch.
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            // Find the magnitude of the vector (the distance) between the touches in each frame.
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            // Find the difference in the distances between each frame.
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+            // Otherwise change the field of view based on the change in distance between the touches.
+            new_fov += deltaMagnitudeDiff * sensitivity;
         }
+
+        //Set the fov but check that it is of a sane value
+        fov = Mathf.Clamp(new_fov, minFov, maxFov);
+        Camera.main.fieldOfView = fov;
 
 
 
