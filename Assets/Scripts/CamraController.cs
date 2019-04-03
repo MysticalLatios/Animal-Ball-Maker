@@ -25,10 +25,25 @@ public class CamraController : MonoBehaviour
 
     private void Update()
     {
+        //Fov ajustment for using a mouse
         float fov = Camera.main.fieldOfView;
         fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
         fov = Mathf.Clamp(fov, minFov, maxFov);
         Camera.main.fieldOfView = fov;
+
+        //Implement pinch to ajust fov
+        //If we have two touches on the screen
+        if (Input.touchCount >= 2)
+        {
+            Vector2 touch0, touch1;
+            float distance;
+            touch0 = Input.GetTouch(0).position;
+            touch1 = Input.GetTouch(1).position;
+            distance = Vector2.Distance(touch0, touch1);
+
+            fov = Mathf.Clamp(distance, minFov, maxFov);
+            Camera.main.fieldOfView = fov;
+        }
 
 
 
