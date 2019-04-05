@@ -26,6 +26,7 @@ public class pivit_around : MonoBehaviour
 
 
     // this insures the world will pivit around the player
+    // note this must be run in Fixed other wise the collision will mess up.
     private void FixedUpdate()
     {
         pivit.position = new Vector3(target.position.x, 0, target.position.z);
