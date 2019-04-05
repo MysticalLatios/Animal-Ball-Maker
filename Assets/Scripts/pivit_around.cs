@@ -26,10 +26,10 @@ public class pivit_around : MonoBehaviour
 
 
     // this insures the world will pivit around the player
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         pivit.position = new Vector3(target.position.x, 0, target.position.z);
-        map.position = new Vector3(-target.position.x, 0, -target.position.z);
+        map.position = new Vector3(0, 0, 0);
     }
 
 }
