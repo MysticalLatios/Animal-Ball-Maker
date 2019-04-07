@@ -17,15 +17,21 @@ public class Start_prefab : MonoBehaviour
     public GameObject PlayePrefab;
     GameObject PlayerInstance;
 
+    void Awake()
+    {
+        // create player instance
+        PlayerInstance = Instantiate(PlayePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        PlayerInstance.SetActive(false);
+
+        // insure camraController knows about player instance.
+        Camera.main.GetComponent<CamraController>().player = PlayerInstance;
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        // create player instance
-        PlayerInstance = Instantiate(PlayePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-
-        // insure camraController knows about player instance.
-        Camera.main.GetComponent<CamraController>().player = PlayerInstance;
+        PlayerInstance.SetActive(true);
     }
 
 }
