@@ -15,6 +15,7 @@ using UnityEngine;
 public class Start_prefab : MonoBehaviour
 {
     public GameObject PlayePrefab;
+    public pivit_around pivit;
     GameObject PlayerInstance;
 
     void Awake()
@@ -22,6 +23,10 @@ public class Start_prefab : MonoBehaviour
         // create player instance
         PlayerInstance = Instantiate(PlayePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         PlayerInstance.SetActive(false);
+
+
+        // sets the link to player in the pivit controller
+        pivit.target = PlayerInstance.transform;
 
         // insure camraController knows about player instance.
         Camera.main.GetComponent<CamraController>().player = PlayerInstance;
