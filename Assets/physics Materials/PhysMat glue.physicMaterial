@@ -7,7 +7,7 @@ PhysicMaterial:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PhysMat glue
-  dynamicFriction: 0.9
+  dynamicFriction: 0.7
   staticFriction: 0.9
   bounciness: 0
   frictionCombine: 1
