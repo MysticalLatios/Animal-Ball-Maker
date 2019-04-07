@@ -1,10 +1,19 @@
-﻿using System.Collections;
+﻿/* 
+ * Authors : Seaney Shell,
+ * GitHubs : RosyMapleMoth,
+ * 
+ * Last Modification : 04/07/2019
+ * 
+ * This file creates a player at the position of the attached GameObject at Start()
+ * TODO this functionality should be moved to a gameManger of some kind when created.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Start_prefab : MonoBehaviour
 {
-
     public GameObject PlayePrefab;
     GameObject PlayerInstance;
 
@@ -12,15 +21,11 @@ public class Start_prefab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // create player instance
         PlayerInstance = Instantiate(PlayePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        //Camera.main.transform.position = new Vector3(-3, 8, 0);
+
+        // insure camraController knows about player instance.
         Camera.main.GetComponent<CamraController>().player = PlayerInstance;
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

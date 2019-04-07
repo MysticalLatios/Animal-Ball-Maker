@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-/*
+﻿/* 
+ * Authors : Seaney Shell,
+ * GitHubs : RosyMapleMoth,
+ * 
+ * Last Modification : 04/07/2019
+ * 
+ * This file implaments arrowkey tilt controls.
+ * 
  * To use this your map must be in the structure of with all ->'s meaning "parent of"
  * GameObject pivit -> GameObject map -> all objects to be rotated by user input.   
  * 
- * Note : this can cuase some issues on highly vertical maps and when the ball gets a large distance away from the map, 
- *        so Stoping exacution quickly after a level fails or ball leaves the bounds may be a good idea
- * 
  * 
  */
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 
 public class pivit_around : MonoBehaviour
 {
