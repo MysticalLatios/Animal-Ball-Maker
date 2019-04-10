@@ -20,24 +20,47 @@ public class KeyboardTilt : MonoBehaviour
      * https://github.com/snailface/UnityBasics/wiki/Rotating-an-Object-through-Arrow-Keys
      * Author : hasala-snailface
      */
+
+    Gyroscope input_Gyro;
+
+    void Start()
+    {
+        //If device has a gyroscope set it up
+        if (SystemInfo.supportsGyroscope)
+        {
+            input_Gyro = Input.gyro;
+            input_Gyro.enabled = true;
+        }
+    }
+
+
     public void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (SystemInfo.supportsGyroscope)
         {
-            transform.Rotate(1f, 0, 0);
+            transform.rotation = input_Gyro.attitude;
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+
+        else
         {
-            transform.Rotate(-1f, 0, 0);
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                transform.Rotate(1f, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Rotate(-1f, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Rotate(0, 0, 1f);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(0, 0, -1f);
+            }
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(0, 0, 1f);
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(0, 0, -1f);
-        }
+        
     }
 
 }
