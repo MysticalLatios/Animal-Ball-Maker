@@ -22,6 +22,7 @@ public class KeyboardTilt : MonoBehaviour
      */
 
     Gyroscope input_Gyro;
+    Vector3 anchor;
 
     void Start()
     {
@@ -63,6 +64,13 @@ public class KeyboardTilt : MonoBehaviour
             }
         }
         
+    }
+
+    public void ResetAnchor()
+    {
+        anchor = input_Gyro.attitude.eulerAngles;
+        //Clear the z
+        anchor.z = 0;
     }
 
 }
