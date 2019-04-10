@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-   
+    public string Campaign_Level_start;
 
-    public void PlayGame() => SceneManager.LoadScene("MatTesting");
+    public void PlayGame() => SceneManager.LoadScene(Campaign_Level_start);
 
     public void QuitGame() => Application.Quit();
 }
