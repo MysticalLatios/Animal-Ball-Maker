@@ -21,6 +21,9 @@ public class CamraController : MonoBehaviour
     void LateUpdate()
     {
         transform.position = player.transform.position + offset;
+
+        //Set the camera to look at the player
+        transform.LookAt(player.transform.position);
     }
 
     private void Update()
