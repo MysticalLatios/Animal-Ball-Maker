@@ -38,7 +38,9 @@ public class KeyboardTilt : MonoBehaviour
     {
         if (SystemInfo.supportsGyroscope)
         {
-            transform.rotation = input_Gyro.attitude;
+            Vector3 absolute_transform = input_Gyro.attitude.eulerAngles;
+
+            transform.rotation = Quaternion.Euler(absolute_transform.x, 0 , absolute_transform.y) ;
         }
 
         else
